@@ -33,6 +33,7 @@ $(function() {
 			clearInterval(timer);
 		}).mouseout(function() {
 			$("#banner").children(".change").css("display","none");	
+			clearInterval(timer);
 			timer = setInterval(autoplay,3000);		
 		}).find(".change").mouseover(function() {
 			$(this).css("color","red");
