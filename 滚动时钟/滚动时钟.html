@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+	    ul,li {list-style:none;margin:0; padding:0;}
+	    #content{width:980px;height:172px;margin:25px auto;}
+	    #list{width:980px;height:172px;}
+	    .time{float:left;height:172px;}
+	    .time li{height:172px;}
+	    .time{overflow:hidden;}
+	</style>
+	<script type="text/javascript">
+		window.onload = function (){
+            var aMove = document.getElementsByClassName("move");
+            var timer = null;
+
+            //初始化
+            var oTime = new Date();
+	        var oHours = oTime.getHours();
+	        var oMinutes = oTime.getMinutes();
+	        var oSeconds = oTime.getSeconds();
+	        var str = "";
+
+	        str = toTwo(oHours) + toTwo(oMinutes) + toTwo(oSeconds);
+
+            for (var i=0; i<aMove.length; i++){
+            	var aImg = aMove[i].getElementsByTagName("img");
+	            aImg[0].src = "img/" + parseInt(str.charAt(i)) + ".jpg";
+	            aMove[i].index = i;
+	            aMove[i].num = parseInt(str.charAt(i));
+	            //console.log(aMove[i].num);
+	        } 
+            
+            fnTime();
+            setInterval(fnTime,1000);
+
+            function fnTime(){
+	            var oTime = new Date();
+	            var oHours = oTime.getHours();
+	            var oMinutes = oTime.getMinutes();
+	            var oSeconds = oTime.getSeconds();
+
+	            var str = "";
+
+	            str = toTwo(oHours) + toTwo(oMinutes) + toTwo(oSeconds);
+
+                for (var i=0; i<aMove.length; i++){
+                	move(aMove[i]);
+                }
+                
+                function move(obj){
+                    var aImg = obj.getElementsByTagName("img");
+                	aImg[1].src = "img/" + parseInt(str.charAt(obj.index)) + ".jpg";
+                    obj.num1 = parseInt(str.charAt(obj.index));
+                    if (obj.num != obj.num1){
+                        clearInterval(obj.timer);
+                        obj.timer = setInterval(function(){
+                        obj.style.marginTop = parseInt(getStyle(obj,"margin-top")) + -10 + "px";
+                        if (parseInt(getStyle(obj,"margin-top")) == -170) {
+                            obj.style.marginTop = -172 + "px";
+                        }
+                        if (parseInt(getStyle(obj,"margin-top")) == -172) {
+                            clearInterval(obj.timer);
+                            aImg[0].src = "img/" + parseInt(str.charAt(obj.index)) + ".jpg";
+                            obj.style.marginTop = 0 + "px";
+                            obj.num = obj.num1;
+                        }
+                        },30);
+                    }
+                }
+
+            }
+
+            function toTwo ( n ) {
+	            return n < 10 ?  '0' + n : '' + n;
+            }
+
+            function getStyle ( obj, attr ) { return obj.currentStyle?obj.currentStyle[attr] : getComputedStyle( obj )[attr]; }
+
+		}
+	</script>
+</head>
+<body>
+	<div id="content">
+	<ul id="list">
+		<li class="time">
+			<div class="move">
+				<ul>
+					<li>
+				        <img src="img/0.jpg" />
+			        </li>
+			        <li>
+				        <img src="img/0.jpg" />
+			        </li>
+			    </ul>
+			</div>
+	    </li>
+		<li class="time">
+			<div class="move">
+				<ul>
+					<li>
+				        <img src="img/0.jpg" />
+			        </li>
+			        <li>
+				        <img src="img/0.jpg" />
+			        </li>
+			    </ul>
+			</div>
+	    </li>
+		<li class="time" >
+			<div>
+				<img src="img/colon.jpg" />
+			</div>
+	    </li>
+		<li class="time">
+			<div class="move">
+				<ul>
+					<li>
+				        <img src="img/0.jpg" />
+			        </li>
+			        <li>
+				        <img src="img/0.jpg" />
+			        </li>
+			    </ul>
+			</div>
+	    </li>
+		<li class="time">
+			<div class="move"> 
+				<ul>
+					<li>
+				        <img src="img/0.jpg" />
+			        </li>
+			        <li>
+				        <img src="img/0.jpg" />
+			        </li>
+			    </ul>
+			</div>
+	    </li>
+		<li class="time" >
+			<div>
+				<img src="img/colon.jpg" />
+			</div>
+	    </li>
+		<li class="time">
+			<div class="move">
+				<ul>
+					<li>
+				        <img src="img/0.jpg" />
+			        </li>
+			        <li>
+				        <img src="img/0.jpg" />
+			        </li>
+			    </ul>
+			</div>
+	    </li>
+		<li class="time">
+			<div class="move">
+				<ul>
+					<li>
+				        <img src="img/0.jpg" />
+			        </li>
+			        <li>
+				        <img src="img/0.jpg" />
+			        </li>
+			    </ul>
+			</div>
+	    </li>
+	</ul>
+    </div>
+</body>
+</html>
